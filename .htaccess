@@ -1,0 +1,24 @@
+# comment out in dev
+# Options +FollowSymLinks
+
+IndexIgnore */*
+RewriteEngine on
+
+# should be /~username/$appName in dev; in production just /
+RewriteBase /~greg/c2c-adv/frontend/web
+
+# if a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-s
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ index.php [NC,L]
+RewriteRule ^.*$ - [NC,L]
+
+# comment out in dev
+#RewriteCond %{HTTP:X-Forwarded-Proto} !https
+#RewriteRule ^(.*)$ https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
+
+# comment out in dev
+#Header edit Location ^http://(.*)$ https://$1
+
+Header set X-UA-Compatible "IE=edge" 
